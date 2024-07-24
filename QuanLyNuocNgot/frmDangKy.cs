@@ -21,7 +21,8 @@ namespace QuanLyNuocNgot
 
         private void btnDangky_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             string account = txtUser.Text.Trim();
             string password = txtPass.Text.Trim();
             string password2 = txtpass2.Text.Trim();
@@ -37,6 +38,8 @@ namespace QuanLyNuocNgot
               string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
+            } else if (password.Length < 8) {
+                MessageBox.Show("Mật khẩu phải ít nhất 8 ký tự.");
             }
             else if (password != password2)
             {
@@ -44,11 +47,18 @@ namespace QuanLyNuocNgot
             }
             else
             {
-                string sql = $"INSERT INTO user (HoTen, TaiKhoan, MatKhau, email, DiaChi, SDT) VALUES ('{name}', '{account}', '{password}', '{email}', '{diaChi}', '{09999999}')";
-                int check = db.Sql(sql);
+
+                string sql = $"INSERT INTO user (HoTen, TaiKhoan, MatKhau, email, DiaChi, SDT) VALUES ('{name}', '{account}', '{db.MD5Hash(password)}', '{email}', '{diaChi}', '{09999999}')";
+                int check = db.dangky(sql);
                 if (check >= 0)
                 {
                     MessageBox.Show("Bạn đã đăng ký thành công.");
+                    txtUser.Text = "";
+                    txtPass.Text = "";
+                    txtpass2.Text = "";
+                    txtEmail.Text = "";
+                    txtName.Text = "";
+                    
                 }
                 else
                 {
@@ -56,6 +66,10 @@ namespace QuanLyNuocNgot
 
                 }
             }
+            } catch {
+                MessageBox.Show("Tài khoản đã tồn tại.");
+            }
+
         }
 
         private void btnDangnhap_Click(object sender, EventArgs e)
@@ -63,6 +77,11 @@ namespace QuanLyNuocNgot
             this.Hide();
             frmDangNhap from = new frmDangNhap();
             from.ShowDialog();
+        }
+
+        private void txtPass_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

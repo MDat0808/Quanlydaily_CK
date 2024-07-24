@@ -28,7 +28,7 @@ namespace QuanLyNuocNgot
         {
             string account = txtUser.Text.Trim();
             string mk = txtPass.Text.Trim();
-
+            string pass = db.MD5Hash(mk);
             if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(mk))
             {
                 MessageBox.Show("Vui lòng nhập thông tin.");
@@ -36,8 +36,8 @@ namespace QuanLyNuocNgot
             }
             // Kiểm tra tài khoản
          
-            int check = db.Login(account, mk);
-            int id = db.getMaNguoiDung(account, mk);
+            int check = db.Login(account, pass);
+            int id = db.getMaNguoiDung(account, pass);
             if (check == 1)
             {
                 this.Hide();

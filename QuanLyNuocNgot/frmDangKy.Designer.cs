@@ -235,6 +235,7 @@
             this.txtPass.TabIndex = 29;
             this.txtPass.Text = "Mật khẩu";
             this.txtPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPass.TextChanged += new System.EventHandler(this.txtPass_TextChanged);
             // 
             // pictureBox4
             // 

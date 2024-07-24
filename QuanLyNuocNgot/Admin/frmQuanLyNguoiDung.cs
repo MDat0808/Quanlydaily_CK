@@ -31,8 +31,10 @@ namespace QuanLyNuocNgot.Admin
             txtMatKhau.Text = "";
             txtQuyen.Text = "";
             txtTaiKhoan.Text = "";
+            txtSDT.Text = "";
             btnLuu.Enabled = false;
             txtTaiKhoan.Enabled = true;
+            txtMatKhau.Enabled = false;
         }
 
         private void LoadNguoiDung()
@@ -81,10 +83,11 @@ namespace QuanLyNuocNgot.Admin
                 txtSDT.Text = dgvUser.Rows[r].Cells["sdt"].Value.ToString();
                 txtDiaChi.Text = dgvUser.Rows[r].Cells["DiaChi"].Value.ToString();
                 txtEmail.Text = dgvUser.Rows[r].Cells["email"].Value.ToString();
-                txtMatKhau.Text = dgvUser.Rows[r].Cells["MatKhau"].Value.ToString();
+                txtMatKhau.Text = db.MD5Hash( dgvUser.Rows[r].Cells["MatKhau"].Value.ToString());
                 txtQuyen.Text = dgvUser.Rows[r].Cells["QuyenTruyCap"].Value.ToString();
                 txtTaiKhoan.Text = dgvUser.Rows[r].Cells["TaiKhoan"].Value.ToString();
                 txtTaiKhoan.Enabled = false;
+                txtMatKhau.Enabled = false;
                 btnThem.Enabled = false;
                 btnLuu.Enabled = true;
             }
@@ -93,27 +96,39 @@ namespace QuanLyNuocNgot.Admin
         private void btnLuu_Click(object sender, EventArgs e)
         {
             int r = dgvUser.CurrentCell.RowIndex;
-            btnThem.Enabled = true;
-            string id = dgvUser.Rows[r].Cells["MaNguoiDung"].Value.ToString();
-            string sql = $"update user set HoTen ='{txtHoTen.Text}', DiaChi = '{txtDiaChi.Text}', email = '{txtEmail.Text}', QuyenTruyCap = '{txtQuyen.Text}', MatKhau = '{txtId.Text}', SDT = '{txtSDT.Text}' where MaNguoiDung = '{id}' ";
-            int check = db.Sql(sql);
-            if (check >= 0)
+            if (txtMatKhau.Text.Length < 8) 
             {
-                MessageBox.Show("Cập nhật dữ liệu thành công.");
-                LoadNguoiDung();
-            }
-            else
+                MessageBox.Show("Mật khẩu phải ít nhất 8 ký tự.");
+            } else
             {
-                MessageBox.Show("Cập nhật dữ liệu thất bại.");
+                string id = dgvUser.Rows[r].Cells["MaNguoiDung"].Value.ToString();
+                string sql = $"update user set HoTen ='{txtHoTen.Text}', DiaChi = '{txtDiaChi.Text}', email = '{txtEmail.Text}', QuyenTruyCap = '{txtQuyen.Text}', SDT = '{txtSDT.Text}' where MaNguoiDung = '{id}' ";
+                int check = db.Sql(sql);
+                if (check >= 0)
+                {
+                    btnThem.Enabled = true;
+                    MessageBox.Show("Cập nhật dữ liệu thành công.");
+                    LoadNguoiDung();
+                    ResetVariable();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật dữ liệu thất bại.");
+                }
+
             }
-            ResetVariable();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-
+                if (string.IsNullOrEmpty(txtHoTen.Text) || string.IsNullOrEmpty(txtDiaChi.Text) || string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtTaiKhoan.Text) || string.IsNullOrEmpty(txtMatKhau.Text) || string.IsNullOrEmpty(txtSDT.Text) )
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                }
+                 else
+                {
                 string sql = $"insert into user (HoTen, DiaChi, email, QuyenTruyCap, TaiKhoan, MatKhau , SDT) values ('{txtHoTen.Text}', '{txtDiaChi.Text}', '{txtEmail.Text}', '{txtQuyen.Text}', '{txtTaiKhoan.Text}', '{txtMatKhau.Text}' ,'{txtSDT.Text}') ";
                 int check = db.Sql(sql);
                 if (check >= 0)
@@ -125,6 +140,8 @@ namespace QuanLyNuocNgot.Admin
                 else
                 {
                     MessageBox.Show("Tạo mới người dùng thất bại.");
+                }
+
                 }
 
             }

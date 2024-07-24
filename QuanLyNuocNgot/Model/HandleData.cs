@@ -9,12 +9,28 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Security.Principal;
 using System.Collections;
+using System.Security.Cryptography;
 
 namespace QuanLyNuocNgot.Model
 {
     internal class HanldeData
     {
         public MySqlConnection connection;
+
+        public string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
+      
         public void KetNoi()
         {
             if (connection == null)
@@ -59,6 +75,31 @@ namespace QuanLyNuocNgot.Model
 
             return rowsAffected;
         }
+
+        public int dangky(string SQL)
+        {
+            int rowsAffected = -1;
+
+            try
+            {
+                KetNoi();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = connection;
+                command.CommandText = SQL;
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Tài khoản đã tồn tại.");
+            }
+            finally
+            {
+                NgatKetNoi();
+            }
+
+            return rowsAffected;
+        }
+
         // Lấy id
         public int getMaNguoiDung(string account, string pass)
         {
@@ -105,17 +146,17 @@ namespace QuanLyNuocNgot.Model
                 KetNoi();
                 MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
-                string SQL = $"SELECT QuyenTruyCap FROM user WHERE TaiKhoan = '{account}' and MatKhau = '{pass}'";
+                string SQL = $"SELECT Quyen FROM user u join QuyenTruyCap q on q.MaQuyen = u.QuyenTruyCap  WHERE TaiKhoan = '{account}' and MatKhau = '{pass}'";
                 command.CommandText = SQL;
                 object user = command.ExecuteScalar();
                 if (user != null)
                 {
                     role = user.ToString();
-                    if (role == "1")
+                    if (role == "admin")
                     {
                         return 1;
                     }
-                    else if (role == "0")
+                    else 
                     {
                         return 0;
                     }
@@ -138,6 +179,7 @@ namespace QuanLyNuocNgot.Model
             return result;
         }
 
+     
         public DataTable getUserById(int id)
         {
             DataTable dt = new DataTable();

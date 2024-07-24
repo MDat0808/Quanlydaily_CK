@@ -231,9 +231,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 39);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(116, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 20);
+            this.label2.Size = new System.Drawing.Size(188, 25);
             this.label2.TabIndex = 46;
             this.label2.Text = "Danh sách hóa đơn:";
             // 

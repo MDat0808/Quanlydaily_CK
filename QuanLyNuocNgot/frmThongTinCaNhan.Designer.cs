@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMatHangDaMua = new System.Windows.Forms.Button();
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.dgvMatHangDaMua = new System.Windows.Forms.DataGridView();
             this.btnThoat = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnMatHangDaMua = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatHangDaMua)).BeginInit();
             this.SuspendLayout();
@@ -79,6 +79,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(848, 715);
             this.panel1.TabIndex = 3;
+            // 
+            // btnMatHangDaMua
+            // 
+            this.btnMatHangDaMua.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMatHangDaMua.Location = new System.Drawing.Point(107, 377);
+            this.btnMatHangDaMua.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMatHangDaMua.Name = "btnMatHangDaMua";
+            this.btnMatHangDaMua.Size = new System.Drawing.Size(239, 49);
+            this.btnMatHangDaMua.TabIndex = 24;
+            this.btnMatHangDaMua.Text = "Sản phẩm đã mua ";
+            this.btnMatHangDaMua.UseVisualStyleBackColor = true;
+            this.btnMatHangDaMua.Click += new System.EventHandler(this.btnMatHangDaMua_Click);
             // 
             // txtSDT
             // 
@@ -286,22 +298,11 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Thông tin cá nhân";
             // 
-            // btnMatHangDaMua
-            // 
-            this.btnMatHangDaMua.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMatHangDaMua.Location = new System.Drawing.Point(107, 377);
-            this.btnMatHangDaMua.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnMatHangDaMua.Name = "btnMatHangDaMua";
-            this.btnMatHangDaMua.Size = new System.Drawing.Size(239, 49);
-            this.btnMatHangDaMua.TabIndex = 24;
-            this.btnMatHangDaMua.Text = "Sản phẩm đã mua ";
-            this.btnMatHangDaMua.UseVisualStyleBackColor = true;
-            this.btnMatHangDaMua.Click += new System.EventHandler(this.btnMatHangDaMua_Click);
-            // 
             // frmThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1182, 725);
             this.Controls.Add(this.panel1);
             this.Name = "frmThongTinCaNhan";

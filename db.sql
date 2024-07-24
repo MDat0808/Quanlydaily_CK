@@ -1,4 +1,4 @@
-
+create database dbquanlydaily;
 USE dbquanlydaily;
 
 CREATE TABLE user (	`MaNguoiDung` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -8,7 +8,13 @@ CREATE TABLE user (	`MaNguoiDung` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
          `email` VARCHAR(100) NOT NULL,
          	DiaChi varchar(100) not null ,
 	SDT varchar(20) not null ,
-    QuyenTruyCap INT default 0 NOT NULL
+    QuyenTruyCap INT default 1 NOT NULL,
+     CONSTRAINT fk_quyen FOREIGN KEY (QuyenTruyCap) REFERENCES quyentruycap(MaQuyen)
+);
+
+create table quyentruycap (
+	MaQuyen INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Quyen varchar(20) default 'user' not null
 );
 
 create table loaimathang (
@@ -54,9 +60,9 @@ INSERT INTO `mathang` (`MaMatHang`, `SoLuong`, `TenMatHang`, `Gia`, `MaLoaiMatHa
 INSERT INTO `mathang` (`MaMatHang`, `SoLuong`, `TenMatHang`, `Gia`, `MaLoaiMatHang`) VALUES ('2', '100', 'Bia Việt', '12000', '1');
 INSERT INTO `mathang` (`MaMatHang`, `SoLuong`, `TenMatHang`, `Gia`, `MaLoaiMatHang`) VALUES ('3', '98', 'Sting', '9000', '2');
 INSERT INTO `mathang` (`MaMatHang`, `SoLuong`, `TenMatHang`, `Gia`, `MaLoaiMatHang`) VALUES ('4', '90', 'Pepsi', '11000', '2');
-INSERT INTO `user` (`MaNguoiDung`, `TaiKhoan`, `MatKhau`, `HoTen`, `email`, `DiaChi`, `SDT`, `QuyenTruyCap`) VALUES ('1', 'admin', 'admin', 'Minh Đạt', 'admin@test.com', 'Tân Bình', '09000009', '1');
-INSERT INTO `user` (`MaNguoiDung`, `TaiKhoan`, `MatKhau`, `HoTen`, `email`, `DiaChi`, `SDT`, `QuyenTruyCap`) VALUES ('2', 'user1', '1234', 'Nguyễn Văn A', 'user@test.com', 'Bình Thuận', '09009099', '0');
+INSERT INTO `user` (`MaNguoiDung`, `TaiKhoan`, `MatKhau`, `HoTen`, `email`, `DiaChi`, `SDT`, `QuyenTruyCap`) VALUES ('1', 'admin', 'admin', 'Minh Đạt', 'admin@test.com', 'Tân Bình', '09000009', 2);
+INSERT INTO `user` (`MaNguoiDung`, `TaiKhoan`, `MatKhau`, `HoTen`, `email`, `DiaChi`, `SDT`, `QuyenTruyCap`) VALUES ('2', 'user1', '1234', 'Nguyễn Văn A', 'user@test.com', 'Bình Thuận', '09009099', 1);
 select TenMatHang,sum(SoLuong) as SoLuong , sum(ThanhTien) as TongTien 
 from chitiethoadon cthd join hoadon hd on cthd.MaHD = hd.MaHoaDon
-where day(hd.ngayLapHoaDon) = DAY(NOW())
+where day(hd.ngayLapHoaDon) = DAY(NOW())	
  group by cthd.tenmathang ;

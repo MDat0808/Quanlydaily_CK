@@ -38,6 +38,9 @@ namespace QuanLyNuocNgot.Model
 
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
+            } else if (password.Length < 8 )
+            {
+                MessageBox.Show("Mật khẩu phải ít nhất 8 ký tự.");
             }
             else if (password != password2)
             {

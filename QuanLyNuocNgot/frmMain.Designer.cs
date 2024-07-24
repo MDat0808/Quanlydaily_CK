@@ -54,7 +54,7 @@
             this.thoátToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,21 +95,21 @@
             // quảnLýHóaĐơnToolStripMenuItem
             // 
             this.quảnLýHóaĐơnToolStripMenuItem.Name = "quảnLýHóaĐơnToolStripMenuItem";
-            this.quảnLýHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quảnLýHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(256, 34);
             this.quảnLýHóaĐơnToolStripMenuItem.Text = "Quản lý hóa đơn";
             this.quảnLýHóaĐơnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýHóaĐơnToolStripMenuItem_Click);
             // 
             // quảnLýMặtHàngToolStripMenuItem
             // 
             this.quảnLýMặtHàngToolStripMenuItem.Name = "quảnLýMặtHàngToolStripMenuItem";
-            this.quảnLýMặtHàngToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quảnLýMặtHàngToolStripMenuItem.Size = new System.Drawing.Size(256, 34);
             this.quảnLýMặtHàngToolStripMenuItem.Text = "Quản lý mặt hàng";
             this.quảnLýMặtHàngToolStripMenuItem.Click += new System.EventHandler(this.quảnLýMặtHàngToolStripMenuItem_Click);
             // 
             // quảnLýTàiKhoảnToolStripMenuItem
             // 
             this.quảnLýTàiKhoảnToolStripMenuItem.Name = "quảnLýTàiKhoảnToolStripMenuItem";
-            this.quảnLýTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quảnLýTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(256, 34);
             this.quảnLýTàiKhoảnToolStripMenuItem.Text = "Quản lý tài khoản";
             this.quảnLýTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýTàiKhoảnToolStripMenuItem_Click);
             // 
